@@ -18,4 +18,10 @@ export class TasksService {
     getTasks() {
       return this.http.get("http://localhost:8080/api/task/get_all/" + localStorage.getItem('user'));
     }
+
+    getEspiratedTasks(date: any): Observable<any>{
+      return this.http.get("http://localhost:8080/api/task/get_prox_task/" + date + "/" + localStorage.getItem('user'));
+    }
+
+    
   }

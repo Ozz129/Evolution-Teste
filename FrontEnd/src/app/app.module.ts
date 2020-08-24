@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table'
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { LogoutComponent } from './users/logout/logout.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -37,7 +39,8 @@ import { LogoutComponent } from './users/logout/logout.component';
     MatSnackBarModule,
     MatTableModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

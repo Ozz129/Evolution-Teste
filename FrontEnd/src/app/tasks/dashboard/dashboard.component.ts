@@ -3,6 +3,8 @@ import { Task } from '../../models/task.model'
 import { TasksService } from '../../services/tasks.service'
 import { MatSnackBar } from "@angular/material/snack-bar";
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import * as moment from 'moment';
+import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -14,10 +16,21 @@ export class DashboardComponent implements OnInit {
    
   displayedColumns: string[] = ['Id','Nombre', 'Prioridad', 'Vencimiento', 'Descripcion', 'Acciones']
   dataSource: Object[]
-  constructor(private _taskServie:TasksService, private snackBar: MatSnackBar ) { }
+  dataSoruceExpiredTask: Object
+  expiredTasks: number;
+  modalOptions:NgbModalOptions;
+  closeResult: string;
+  constructor(private _taskServie:TasksService, private snackBar: MatSnackBar, private modalService: NgbModal ) {
+    this.modalOptions = {
+      backdrop:'static',
+      backdropClass:'customBackdrop'
+    }
+   }
 
   ngOnInit(): void {
+    this.expiredTasks = 0
     this.loadTasks();
+    this.getExpiratedTask();
   }
 
 
@@ -55,10 +68,31 @@ deleteTasks(id: number, descripcion: string){
 
     }
   })
-
-
-
-
 }
 
+getExpiratedTask(){
+  let today = moment().format('YYYY-MM-DD');
+  console.log('fecha',today)
+  this._taskServie.getEspiratedTasks(today).subscribe((data) => {
+    this.expiredTasks = data.count
+    this.dataSoruceExpiredTask = data.expirated_task
+  })
+}
+
+open(content) {
+  this.modalService.open(content, this.modalOptions).result.then((result) => {
+    this.closeResult = `Closed with: ${result}`;
+  }, (reason) => {
+    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  });
+}
+private getDismissReason(reason: any): string {
+  if (reason === ModalDismissReasons.ESC) {
+    return 'by pressing ESC';
+  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+    return 'by clicking on a backdrop';
+  } else {
+    return  `with: ${reason}`;
+  }
+}
 }
