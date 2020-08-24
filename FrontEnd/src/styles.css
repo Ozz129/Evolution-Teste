@@ -1,0 +1,141 @@
+h3 {
+  font-weight: bold;
+}
+
+
+.title {
+  font-weight: bold;
+  color: black;
+  margin-top: 2%;
+  font-weight: bold;
+}
+
+.outlinenone {
+  outline: none;
+  border: #E1E1E1 solid 1px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 2%;
+  color: #9c9c9c;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.mensaje {
+  padding-left: 23%;
+  padding-right: 23%;
+  margin-top: 2%;
+  font-size: 15px;
+  color: gray;
+}
+.logout{
+  color: red;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  float: right;
+  padding-right: 10%;
+  padding-top: 2%;
+}
+
+.side_img {
+  width: 80%;
+  height: 80%;
+  padding-left: 15%;
+}
+
+.create_img{
+  width: 110%;
+  height: 70%;
+  padding-top: 10%;
+}
+.container {
+  margin-top: 4%;
+}
+
+.btn_enviar {
+  text-decoration: none;
+  padding: 3%;
+  padding-left: 8%;
+  padding-right: 8%;
+  font-style: bold;
+  color: #fff;
+  background-color: #E03B65;
+  border-radius: 25px;
+  font-size: 15px;
+}
+
+.form {
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 10%;
+  margin-right: 20%;
+  border-radius: 5%;
+  -webkit-box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
+  -moz-box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
+  box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
+  margin-bottom: 5%;
+}
+
+
+label {
+  margin-top: 2%;
+  font-weight: bold;
+}
+
+::-webkit-input-placeholder { 
+  color: #E1E1E1;
+}
+:-moz-placeholder { 
+ color: #E1E1E1;
+ opacity: 1;
+}
+::-moz-placeholder { 
+ color: #E1E1E1;
+ opacity:  1;
+}
+:-ms-input-placeholder { 
+ color: #E1E1E1;
+}
+
+
+  select::-ms-expand {
+  display: none; 
+  }
+
+  @media only screen
+and (min-device-width : 320px)
+and (max-device-width : 667px) {
+  .form {
+      margin: 0;
+      margin-top: 5%;
+      margin-bottom: 5%;
+  }
+
+  .mensaje {
+      padding: 5%;
+  }
+
+  .title{
+      padding: 5%;
+  }
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.prioridad{
+  padding: 5px;
+  border-radius: 64px 64px 64px 64px;
+-moz-border-radius: 64px 64px 64px 64px;
+-webkit-border-radius: 64px 64px 64px 64px;
+border: 0px solid #000000;
+color: #fff;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  margin:1rem auto;
+  max-width: 600px;
+}   

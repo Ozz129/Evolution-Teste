@@ -1,0 +1,65 @@
+<app-logout></app-logout>
+
+<div class="container">
+
+  <div class="text-center">
+    <img src="../../../assets/img/logo.png" alt="">
+  </div>
+  <mat-card>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Tareas</mat-card-title>
+          <mat-card-subtitle>Aqui puedes crear una tarea</mat-card-subtitle>
+        </mat-card-header>
+      </div>
+      <div class="col-sm-4">
+        <mat-card-actions>
+          <a [routerLink]="['/dashboard']" class="btn btn-sm btn-primary">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+          </a>
+        </mat-card-actions>
+      </div>
+      <div class="col-sm-7">
+        <mat-card-content>
+          <div class="col-sm-12">
+            <div class="row form">
+              <div class="col-sm-12">
+                <label for="">Nombre</label>
+                <input type="text" class="outlinenone" id="name" name="name" [(ngModel)]="newTask.name">
+              </div>
+              <div class="col-sm-12">
+                <label for="">Descripción</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                  [(ngModel)]="newTask.description"></textarea>
+              </div>
+              <div class="col-sm-12">
+                <label for="">Priopridad</label>
+                <p>Despliega para seleccionar</p>
+                <select name="miselect" class="form-control" [(ngModel)]="newTask.priority">
+                  <option disabled>Selecciona</option>
+                  <option [value]="item.value" *ngFor="let item of lista">{{item.name}}</option>
+                </select>
+              </div>
+              <div class="col-sm-12">
+                <label for="">Duración:</label>
+                <input type="number" class="outlinenone" id="name" name="name" [(ngModel)]="validity"
+                  placeholder="Indica en días, la duración de esta tarea">
+              </div>
+              <div class="col-sm-12" style="margin-top: 5%; text-align: center; padding-top: 10%;">
+                <button type="submit" class="btn_enviar" (click)="createTask()">INGRESAR</button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </div>
+      <div class="col-sm-5">
+        <img class="create_img" src="../../../assets/img/tasks2.jpg" alt="Photo of a Shiba Inu">
+      </div>
+    </div>
+
+
+  </mat-card>
+</div>

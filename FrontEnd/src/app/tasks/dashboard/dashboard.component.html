@@ -1,0 +1,83 @@
+<app-logout></app-logout>
+
+<div class="container">
+
+
+  <div class="text-center">
+    <img src="../../../assets/img/logo.png" alt="">
+  </div>
+  <mat-card>
+
+    <div class="row">
+      <div class="col-sm-7">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Lista de tareas</mat-card-title>
+        </mat-card-header>
+      </div>
+      <div class="col-sm-5">
+        <mat-card-actions>
+            <a class="btn btn-sm btn-primary" [routerLink]="['/createTask']"><mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon></a>
+        </mat-card-actions>
+      </div>
+      <div class="col-sm-8">
+        <mat-card-content>
+          <div class="table-responsive">
+            <table mat-table [dataSource]="dataSource" class="table table-striped">
+              <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.idTask}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let element"> {{element.nameTask}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Prioridad">
+                <th mat-header-cell *matHeaderCellDef> Prioridad </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <span class="prioridad"  style="background-color: red;" *ngIf="element.priorityTask == 'ALTA'">
+                        {{element.priorityTask}} 
+                    </span>
+                    <span class="prioridad"  style="background-color: green;" *ngIf="element.priorityTask == 'MEDIA'">
+                        {{element.priorityTask}} 
+                    </span>
+                    <span class="prioridad"  style="background-color: blue;" *ngIf="element.priorityTask == 'BAJA'">
+                        {{element.priorityTask}} 
+                    </span>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Vencimiento">
+                <th mat-header-cell *matHeaderCellDef> Vencimiento </th>
+                <td mat-cell *matCellDef="let element"> {{element.expirationTask | date:'dd-MM-yyyy'}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Descripcion">
+                <th mat-header-cell *matHeaderCellDef> Desccripción </th>
+                <td mat-cell *matCellDef="let element"> {{element.descriptionTask}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)='deleteTasks(element.idTask)' style="color: red; cursor: pointer;">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete_forever</mat-icon>
+                    </a>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+        </mat-card-content>
+      </div>
+      <div class="col-sm-4">
+        <img mat-card-image src="../../../assets/img/scheduler.png" alt="Photo of a Shiba Inu">
+      </div>
+    </div>
+
+
+  </mat-card>
+</div>
