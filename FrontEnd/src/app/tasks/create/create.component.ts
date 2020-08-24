@@ -29,8 +29,8 @@ export class CreateComponent implements OnInit {
   createTask(){
     const today = moment()
     const expirationDate = today.add(this.validity, 'days')
-    this.newTask.expiration = expirationDate.format('YYYY-MM-DD')
-    this.newTask.user = parseInt(localStorage.getItem('user'))
+    this.newTask.expirationTask = expirationDate.format('YYYY-MM-DD')
+    this.newTask.userTask = parseInt(localStorage.getItem('user'))
 
     this._taskService.createTasks(this.newTask).subscribe((data) => {
       if(data.status){

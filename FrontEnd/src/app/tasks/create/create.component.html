@@ -28,17 +28,17 @@
             <div class="row form">
               <div class="col-sm-12">
                 <label for="">Nombre</label>
-                <input type="text" class="outlinenone" id="name" name="name" [(ngModel)]="newTask.name">
+                <input type="text" class="outlinenone" id="name" name="name" [(ngModel)]="newTask.nameTask">
               </div>
               <div class="col-sm-12">
                 <label for="">Descripción</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                  [(ngModel)]="newTask.description"></textarea>
+                  [(ngModel)]="newTask.descriptionTask"></textarea>
               </div>
               <div class="col-sm-12">
                 <label for="">Priopridad</label>
                 <p>Despliega para seleccionar</p>
-                <select name="miselect" class="form-control" [(ngModel)]="newTask.priority">
+                <select name="miselect" class="form-control" [(ngModel)]="newTask.priorityTask">
                   <option disabled>Selecciona</option>
                   <option [value]="item.value" *ngFor="let item of lista">{{item.name}}</option>
                 </select>

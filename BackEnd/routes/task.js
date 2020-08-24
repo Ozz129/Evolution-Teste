@@ -6,7 +6,7 @@ module.exports = function (app, prefix) {
         let con = await connection.dbConnection();
 
         let sql =  `INSERT INTO tbl_tasks (nameTask, priorityTask, expirationTask, descriptionTask, userTask) VALUES (?,?,?,?,?)` 
-        let params = [req.body.name, req.body.priority, req.body.expiration, req.body.description, req.body.user]
+        let params = [req.body.nameTask, req.body.priorityTask, req.body.expirationTask, req.body.descriptionTask, req.body.userTask]
 
         con.query(sql, params, function(err, result){
             if(err){
@@ -97,6 +97,48 @@ module.exports = function (app, prefix) {
                     msg: 'Consulta exitosa',
                     expirated_task,
                     count: expirated_task.length
+                })
+            }
+        })
+    })
+
+    app.get(prefix + '/get/:id', async(req, res) => {
+        let con = await connection.dbConnection();
+        let sql = `SELECT * FROM tbl_tasks WHERE idTask = ?`
+        con.query(sql, [req.params.id], function(err, result){
+            if(err){
+                res.status(500).send({
+                    status: false,
+                    msg: 'Ocurrio un error obteniendo la tarea',
+                    error: err
+                })
+            }else{
+                res.status(200).send({
+                    status: true,
+                    msg: 'Consulta exitosa',
+                    result
+                })
+            }
+        })
+    })
+
+    app.put(prefix + '/update_task', async(req, res) => {
+        let con = await connection.dbConnection();
+
+        let sql = `UPDATE tbl_tasks SET nameTask = ?, priorityTask = ?, expirationTask = ?, descriptionTask = ? WHERE idTask = ?`
+
+        con.query(sql, [req.body.nameTask, req.body.priorityTask, req.body.expirationTask, req.body.descriptionTask, req.body.idTask], function(err, result){
+            if(err){
+                res.status(500).send({
+                    status: false,
+                    msg: 'Ocurrio un error actualizando la tarea',
+                    error: err
+                })
+            }else{
+                res.status(200).send({
+                    status: true,
+                    msg: 'Actualización exitosa',
+                    result
                 })
             }
         })

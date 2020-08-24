@@ -23,5 +23,13 @@ export class TasksService {
       return this.http.get("http://localhost:8080/api/task/get_prox_task/" + date + "/" + localStorage.getItem('user'));
     }
 
+    getTask(id: number){
+      return this.http.get("http://localhost:8080/api/task/get/" + id);
+    }
+
+    updateTask(task: any){
+      return this.http.put("http://localhost:8080/api/task/update_task", task)
+    }
+
     
   }

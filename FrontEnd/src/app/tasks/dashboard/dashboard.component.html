@@ -13,12 +13,18 @@
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Lista de tareas</mat-card-title>
-          <mat-card-subtitle><h3>TIENES <a data-toggle="tooltip" data-placement="top" title="Presiona para listar" style="color: red; cursor: pointer; font-size: 25px;" (click)="open(mymodal)"><strong>{{expiredTasks}}</strong></a> TAREAS VENCIDAS</h3></mat-card-subtitle>
+          <mat-card-subtitle>
+            <h3>TIENES <a data-toggle="tooltip" data-placement="top" title="Presiona para listar"
+                style="color: red; cursor: pointer; font-size: 25px;"
+                (click)="open(mymodal,0)"><strong>{{expiredTasks}}</strong></a> TAREAS VENCIDAS</h3>
+          </mat-card-subtitle>
         </mat-card-header>
       </div>
       <div class="col-sm-5">
         <mat-card-actions>
-            <a class="btn btn-sm btn-primary" [routerLink]="['/createTask']"><mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon></a>
+          <a class="btn btn-sm btn-primary" [routerLink]="['/createTask']">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+          </a>
         </mat-card-actions>
       </div>
       <div class="col-sm-8">
@@ -37,16 +43,16 @@
 
               <ng-container matColumnDef="Prioridad">
                 <th mat-header-cell *matHeaderCellDef> Prioridad </th>
-                <td mat-cell *matCellDef="let element"> 
-                    <span class="prioridad"  style="background-color: red;" *ngIf="element.priorityTask == 'ALTA'">
-                        {{element.priorityTask}} 
-                    </span>
-                    <span class="prioridad"  style="background-color: green;" *ngIf="element.priorityTask == 'MEDIA'">
-                        {{element.priorityTask}} 
-                    </span>
-                    <span class="prioridad"  style="background-color: blue;" *ngIf="element.priorityTask == 'BAJA'">
-                        {{element.priorityTask}} 
-                    </span>
+                <td mat-cell *matCellDef="let element">
+                  <span class="prioridad" style="background-color: red;" *ngIf="element.priorityTask == 'ALTA'">
+                    {{element.priorityTask}}
+                  </span>
+                  <span class="prioridad" style="background-color: green;" *ngIf="element.priorityTask == 'MEDIA'">
+                    {{element.priorityTask}}
+                  </span>
+                  <span class="prioridad" style="background-color: blue;" *ngIf="element.priorityTask == 'BAJA'">
+                    {{element.priorityTask}}
+                  </span>
                 </td>
               </ng-container>
 
@@ -63,9 +69,12 @@
               <ng-container matColumnDef="Acciones">
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let element">
-                    <a (click)='deleteTasks(element.idTask)' style="color: red; cursor: pointer;">
-                        <mat-icon aria-hidden="false" aria-label="Example home icon">delete_forever</mat-icon>
-                    </a>
+                  <a (click)='deleteTasks(element.idTask)' style="color: red; cursor: pointer;">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">delete_forever</mat-icon>
+                  </a>
+                  <a (click)='open(modalUpdate, element.idTask)' style="cursor: pointer;">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+                  </a>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -81,7 +90,7 @@
     <ng-template #mymodal let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Tareas vencidas</h4>
-     
+
       </div>
       <div class="modal-body">
         <table mat-table [dataSource]="dataSoruceExpiredTask" class="table table-striped">
@@ -97,16 +106,16 @@
 
           <ng-container matColumnDef="Prioridad">
             <th mat-header-cell *matHeaderCellDef> Prioridad </th>
-            <td mat-cell *matCellDef="let element"> 
-                <span class="prioridad"  style="background-color: red;" *ngIf="element.priorityTask == 'ALTA'">
-                    {{element.priorityTask}} 
-                </span>
-                <span class="prioridad"  style="background-color: green;" *ngIf="element.priorityTask == 'MEDIA'">
-                    {{element.priorityTask}} 
-                </span>
-                <span class="prioridad"  style="background-color: blue;" *ngIf="element.priorityTask == 'BAJA'">
-                    {{element.priorityTask}} 
-                </span>
+            <td mat-cell *matCellDef="let element">
+              <span class="prioridad" style="background-color: red;" *ngIf="element.priorityTask == 'ALTA'">
+                {{element.priorityTask}}
+              </span>
+              <span class="prioridad" style="background-color: green;" *ngIf="element.priorityTask == 'MEDIA'">
+                {{element.priorityTask}}
+              </span>
+              <span class="prioridad" style="background-color: blue;" *ngIf="element.priorityTask == 'BAJA'">
+                {{element.priorityTask}}
+              </span>
             </td>
           </ng-container>
 
@@ -123,9 +132,9 @@
           <ng-container matColumnDef="Acciones">
             <th mat-header-cell *matHeaderCellDef> Acciones </th>
             <td mat-cell *matCellDef="let element">
-                <a (click)='deleteTasks(element.idTask)' style="color: red; cursor: pointer;">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">delete_forever</mat-icon>
-                </a>
+              <a (click)='deleteTasks(element.idTask)' style="color: red; cursor: pointer;">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">delete_forever</mat-icon>
+              </a>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -134,6 +143,36 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+      </div>
+    </ng-template>
+
+    <ng-template #modalUpdate let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Actualizar tarea</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <label for="">Nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="updatedTask.nameTask">
+          </div>
+          <div class="col-sm-12">
+            <label for="">Descripcion</label>
+            <textarea type="text" class="form-control" [(ngModel)]="updatedTask.descriptionTask"></textarea>
+          </div>
+          <div class="col-sm-12">
+            <label for="">Prioridad</label>
+            <input type="text" class="form-control" [(ngModel)]="updatedTask.priorityTask">
+          </div>
+      
+          <div class="col-sm-12">
+            <label for="">Validez</label>
+            <input type="text" class="form-control" [(ngModel)]="updatedTask.expirationTask">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="actualizar(updatedTask.idTask)">Actualizar</button>
       </div>
     </ng-template>
   </mat-card>

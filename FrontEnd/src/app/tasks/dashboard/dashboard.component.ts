@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   expiredTasks: number;
   modalOptions:NgbModalOptions;
   closeResult: string;
+
+  updatedTask = new Task(0,'','',null,'',0);
   constructor(private _taskServie:TasksService, private snackBar: MatSnackBar, private modalService: NgbModal ) {
     this.modalOptions = {
       backdrop:'static',
@@ -79,16 +81,45 @@ getExpiratedTask(){
   })
 }
 
-open(content) {
+
+open(content, id: number) {
+
+      if(id != 0){
+        this._taskServie.getTask(id).subscribe((res: any) => {
+          this.updatedTask = res.result[0]
+          this.updatedTask.expirationTask = moment(this.updatedTask.expirationTask).format('YYYY-MM-DD')
+        })
+      }
+ 
   this.modalService.open(content, this.modalOptions).result.then((result) => {
     this.closeResult = `Closed with: ${result}`;
   }, (reason) => {
-    this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    this.closeResult = `Dismissed ${this.getDismissReason(reason, id)}`;
   });
+
+ 
+
 }
-private getDismissReason(reason: any): string {
+actualizar(id: number){
+  console.log(id)
+  this._taskServie.updateTask(this.updatedTask).subscribe((data: any) => {
+   if(data.status){
+    let snackbar = this.snackBar.open('Tarea actualizada', 'ok', {
+      duration: 2000
+   });
+   snackbar.afterDismissed().subscribe((action) => {
+     if(action){
+      location.reload();
+     }
+   })
+   }
+  })
+}
+private getDismissReason(reason: any, id: number) {
+ 
   if (reason === ModalDismissReasons.ESC) {
     return 'by pressing ESC';
+    
   } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
     return 'by clicking on a backdrop';
   } else {
