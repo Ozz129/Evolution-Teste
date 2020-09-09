@@ -1,0 +1,21 @@
+.padre{ 
+    color: #ffffff;
+    text-align:center;
+    margin: auto;
+    padding-top: 15%;
+    
+}
+.fondo{ 
+    background-color:#8CA5C2; 
+}
+.title{
+ font-weight: bold;
+ text-transform: uppercase;
+}
+.espacio{
+    text-align:center;
+    margin-right: 40%!important;
+    margin-left: auto!important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
