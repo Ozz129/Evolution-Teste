@@ -17,6 +17,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { LogoutComponent } from './users/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormularioPruebaComponent } from './formulario-prueba/formulario-prueba.component';
+import { FormularioSinspectComponent } from './formulario-sinspect/formulario-sinspect.component';
 
 
 
@@ -28,7 +30,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     DashboardComponent,
     CreateComponent,
-    LogoutComponent
+    LogoutComponent,
+    FormularioPruebaComponent,
+    FormularioSinspectComponent
   ],
   imports: [
     BrowserModule,
